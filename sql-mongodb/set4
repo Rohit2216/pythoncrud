@@ -39,6 +39,19 @@ db.Rides.aggregate([
 - **Prerequisite**: Understand using HAVING clause in SQL / using match in MongoDB's aggregate pipeline
 - **Problem**: Write a query to find **`driver_id`** that have completed more than 5 rides.
 
+
+SELECT driver_id, COUNT(*) AS ride_count
+FROM Rides
+GROUP BY driver_id
+HAVING COUNT(*) > 5;
+
+
+db.Rides.aggregate([
+    { $group: { _id: "$driver_id", rideCount: { $sum: 1 } } },
+    { $match: { rideCount: { $gt: 5 } } }
+]);
+
+
 **Problem 39:**
 
 - **Prerequisite**: Understand the use of INNER JOIN in SQL / Lookup in MongoDB
