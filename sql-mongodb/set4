@@ -57,6 +57,13 @@ db.Rides.aggregate([
 - **Prerequisite**: Understand the use of INNER JOIN in SQL / Lookup in MongoDB
 - **Problem**: Assuming there is another collection/table called **`Drivers`** with **`driver_id`** and **`name`** fields, write a query to find the name of the driver with the highest **`fare`**.
 
+SELECT d.name
+FROM Rides r
+JOIN Drivers d ON r.driver_id = d.driver_id
+WHERE r.fare = (SELECT MAX(fare) FROM Rides);
+
+
+
 **Problem 40:**
 
 - **Prerequisite**: Understand the concept of subqueries in SQL / using multiple stages in MongoDB's aggregate pipeline
