@@ -85,25 +85,82 @@ db.products.find(
 - **Prerequisite**: Understand basic WHERE clause in SQL / MongoDB's find method
 - **Problem**: Write a query to fetch the customer with the **`id`** of 3.
 
+SELECT *
+FROM Products
+WHERE Price > 100;
+
+
+// Find documents from the "products" collection where the price is greater than 100
+db.products.find({ Price: { $gt: 100 } });
+
+// Find documents with multiple conditions using the $and operator
+db.products.find({
+  $and: [
+    { Category: 'Electronics' },
+    { Price: { $gt: 200 } }
+  ]
+});
+
+
 **Problem 6:**
 
 - **Prerequisite**: Understand using string patterns in SQL (LIKE clause) / using regex in MongoDB
 - **Problem**: Write a query to fetch all customers whose **`name`** starts with 'A'.
+
+
+SELECT *
+FROM Customers
+WHERE name LIKE 'A%';
+
+
+db.customers.find({ name: /^A/ });
+
 
 **Problem 7:**
 
 - **Prerequisite**: Understand how to order data in SQL / MongoDB
 - **Problem**: Write a query to fetch all customers, ordered by **`name`** in descending order.
 
+SELECT *
+FROM Customers
+ORDER BY name DESC;
+
+
+
+db.customers.find().sort({ name: -1 });
+
+
+
+
 **Problem 8:**
 
 - **Prerequisite**: Understand data updating in SQL / MongoDB
 - **Problem**: Write a query to update the **`address`** of the customer with **`id`** 4.
 
+UPDATE Customers
+SET address = 'New Address'
+WHERE id = 4;
+
+
+db.customers.updateOne(
+  { _id: 4 },
+  { $set: { address: 'New Address' } }
+);
+
+
 **Problem 9:**
 
 - **Prerequisite**: Understand how to limit results in SQL / MongoDB
 - **Problem**: Write a query to fetch the top 3 customers when ordered by **`id`** in ascending order.
+
+SELECT *
+FROM Customers
+ORDER BY id ASC
+LIMIT 3;
+
+
+db.customers.find().sort({ id: 1 }).limit(3);
+
 
 **Problem 10:**
 
