@@ -155,6 +155,40 @@ JOIN Drivers d ON r.driver_id = d.driver_id
 JOIN Passengers p ON r.passenger_id = p.passenger_id;
 
 
+db.Rides.aggregate([
+    {
+        $lookup: {
+            from: "Drivers",
+            localField: "driver_id",
+            foreignField: "driver_id",
+            as: "driver"
+        }
+    },
+    {
+        $lookup: {
+            from: "Passengers",
+            localField: "passenger_id",
+            foreignField: "passenger_id",
+            as: "passenger"
+        }
+    },
+    {
+        $unwind: "$driver"
+    },
+    {
+        $unwind: "$passenger"
+    },
+    {
+        $project: {
+            _id: 0,
+            ride_id: "$id",
+            driver_name: "$driver.name",
+            passenger_name: "$passenger.name"
+        }
+    }
+]);
+
+
 **Problem 45:**
 
 - **Prerequisite**: Understand how to alter table schemas in SQL / adding and modifying fields in MongoDB documents
