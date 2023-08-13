@@ -63,6 +63,22 @@ JOIN Drivers d ON r.driver_id = d.driver_id
 WHERE r.fare = (SELECT MAX(fare) FROM Rides);
 
 
+db.Rides.aggregate([
+    { $sort: { fare: -1 } },
+    { $limit: 1 },
+    {
+        $lookup: {
+            from: "Drivers",
+            localField: "driver_id",
+            foreignField: "driver_id",
+            as: "driver"
+        }
+    },
+    { $unwind: "$driver" },
+    { $project: { driverName: "$driver.name", _id: 0 } }
+]);
+
+
 
 **Problem 40:**
 
