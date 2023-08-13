@@ -197,3 +197,6 @@ db.Rides.aggregate([
 
 ALTER TABLE Rides
 ADD tip DECIMAL(6,2);
+
+
+db.Rides.updateMany({}, { $set: { tip: 0.00 } });
