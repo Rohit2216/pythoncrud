@@ -144,10 +144,30 @@ db.Restaurants.count({ delivery_available: true });
 - **Prerequisite**: Understand using string patterns in SQL (LIKE clause) / using regex in MongoDB
 - **Problem**: Write a query to fetch all restaurants whose **`location`** contains 'New York'.
 
+SELECT *
+FROM Restaurants
+WHERE location LIKE '%New York%';
+
+
+db.Restaurants.find({ location: /New York/ });
+
+
+
+
 **Problem 23:**
 
 - **Prerequisite**: Understand how to use the AVG function in SQL / MongoDB's aggregate functions
 - **Problem**: Write a query to calculate the average **`average_rating`** of all restaurants.
+
+
+SELECT AVG(average_rating) AS average_rating
+FROM Restaurants;
+
+
+db.Restaurants.aggregate([
+    { $group: { _id: null, avgRating: { $avg: "$average_rating" } } }
+]);
+
 
 **Problem 24:**
 
