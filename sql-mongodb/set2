@@ -116,10 +116,28 @@ db.Restaurants.find({ delivery_available: true, average_rating: { $gt: 4 } });
 - **Prerequisite**: Understand how to use NULL checks in SQL / MongoDB
 - **Problem**: Write a query to fetch all restaurants where the **`cuisine_type`** field is not set or is null.
 
+
+SELECT *
+FROM Restaurants
+WHERE cuisine_type IS NULL;
+
+
+db.Restaurants.find({ cuisine_type: { $exists: false } });
+
+
 **Problem 21:**
 
 - **Prerequisite**: Understand how to count rows / documents in SQL / MongoDB
 - **Problem**: Write a query to count the number of restaurants that have **`delivery_available`**.
+
+
+SELECT COUNT(*)
+FROM Restaurants
+WHERE delivery_available = true;
+
+
+db.Restaurants.count({ delivery_available: true });
+
 
 **Problem 22:**
 
