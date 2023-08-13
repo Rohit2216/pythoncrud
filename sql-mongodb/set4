@@ -92,6 +92,13 @@ ORDER BY total_earnings DESC
 LIMIT 3;
 
 
+db.Rides.aggregate([
+    { $group: { _id: "$driver_id", totalEarnings: { $sum: "$fare" } } },
+    { $sort: { totalEarnings: -1 } },
+    { $limit: 3 }
+]);
+
+
 **Problem 41:**
 
 - **Prerequisite**: Understand date and time functions in SQL / MongoDB
