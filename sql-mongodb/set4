@@ -22,6 +22,18 @@ db.Rides.find().sort({ fare: 1 }).limit(1);
 - **Prerequisite**: Understand using the GROUP BY clause in SQL / using aggregate in MongoDB
 - **Problem**: Write a query to find the average **`fare`** and **`distance`** for each **`driver_id`**.
 
+
+SELECT driver_id, AVG(fare) AS avg_fare, AVG(distance) AS avg_distance
+FROM Rides
+GROUP BY driver_id;
+
+
+
+db.Rides.aggregate([
+    { $group: { _id: "$driver_id", avgFare: { $avg: "$fare" }, avgDistance: { $avg: "$distance" } } }
+]);
+
+
 **Problem 38:**
 
 - **Prerequisite**: Understand using HAVING clause in SQL / using match in MongoDB's aggregate pipeline
