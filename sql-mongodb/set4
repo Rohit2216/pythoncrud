@@ -3,6 +3,20 @@
 - **Prerequisite**: Understand using the MAX and MIN functions in SQL / using sort and limit in MongoDB
 - **Problem**: Write a query to find the ride with the highest and lowest **`fare`**.
 
+SELECT *
+FROM Rides
+WHERE fare = (SELECT MAX(fare) FROM Rides);
+
+SELECT *
+FROM Rides
+WHERE fare = (SELECT MIN(fare) FROM Rides);
+
+
+db.Rides.find().sort({ fare: -1 }).limit(1);
+
+db.Rides.find().sort({ fare: 1 }).limit(1);
+
+
 **Problem 37:**
 
 - **Prerequisite**: Understand using the GROUP BY clause in SQL / using aggregate in MongoDB
