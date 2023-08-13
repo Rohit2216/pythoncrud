@@ -120,6 +120,15 @@ db.Rides.find({ ride_date: { $gte: lastSevenDays } });
 - **Prerequisite**: Understand the concept of NULL values and how to handle them in SQL / MongoDB
 - **Problem**: Write a query to find all rides where the **`end_location`** is not set.
 
+
+SELECT *
+FROM Rides
+WHERE end_location IS NULL;
+
+
+db.Rides.find({ end_location: { $exists: false } });
+
+
 **Problem 43:**
 
 - **Prerequisite**: Understand the use of complex mathematical operations in SQL / MongoDB
