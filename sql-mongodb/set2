@@ -174,7 +174,23 @@ db.Restaurants.aggregate([
 - **Prerequisite**: Understand how to limit results in SQL / MongoDB
 - **Problem**: Write a query to fetch the top 5 restaurants when ordered by **`average_rating`** in descending order.
 
+SELECT *
+FROM Restaurants
+ORDER BY average_rating DESC
+LIMIT 5;
+
+
+db.Restaurants.find().sort({ average_rating: -1 }).limit(5);
+
+
 **Problem 25:**
 
 - **Prerequisite**: Understand data deletion in SQL / MongoDB
 - **Problem**: Write a query to delete the restaurant with **`id`** 3.
+
+
+DELETE FROM Restaurants
+WHERE _id = 3;
+
+
+db.Restaurants.deleteOne({ _id: 3 });
