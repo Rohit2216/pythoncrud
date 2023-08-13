@@ -167,27 +167,78 @@ db.customers.find().sort({ id: 1 }).limit(3);
 - **Prerequisite**: Understand data deletion in SQL / MongoDB
 - **Problem**: Write a query to delete the customer with **`id`** 2.
 
+DELETE FROM Customers
+WHERE id = 2;
+
+
+db.customers.deleteOne({ _id: 2 });
+
+
 **Problem 11:**
 
 - **Prerequisite**: Understand how to count rows / documents in SQL / MongoDB
 - **Problem**: Write a query to count the number of customers.
+
+SELECT COUNT(*) AS customer_count
+FROM Customers;
+
+
+db.customers.count();
+
 
 **Problem 12:**
 
 - **Prerequisite**: Understand how to skip rows / documents in SQL / MongoDB
 - **Problem**: Write a query to fetch all customers except the first two when ordered by **`id`** in ascending order.
 
+
+SELECT *
+FROM Customers
+ORDER BY id ASC
+OFFSET 2;
+
+
+db.customers.find().sort({ id: 1 }).skip(2);
+
+
 **Problem 13:**
 
 - **Prerequisite**: Understand filtering with multiple conditions in SQL / MongoDB
 - **Problem**: Write a query to fetch all customers whose **`id`** is greater than 2 and **`name`** starts with 'B'.
+
+
+SELECT *
+FROM Customers
+WHERE id > 2 AND name LIKE 'B%';
+
+
+db.customers.find({ $and: [ { id: { $gt: 2 } }, { name: /^B/ } ] });
+
 
 **Problem 14:**
 
 - **Prerequisite**: Understand how to use OR conditions in SQL / MongoDB
 - **Problem**: Write a query to fetch all customers whose **`id`** is less than 3 or **`name`** ends with 's'.
 
+
+SELECT *
+FROM Customers
+WHERE id < 3 OR name LIKE '%s';
+
+
+db.customers.find({ $or: [ { id: { $lt: 3 } }, { name: /s$/ } ] });
+
+
 **Problem 15:**
 
 - **Prerequisite**: Understand how to use NULL checks in SQL / MongoDB
 - **Problem**: Write a query to fetch all customers where the **`phone_number`** field is not set or is null.
+
+
+SELECT *
+FROM Customers
+WHERE phone_number IS NULL;
+
+
+
+db.customers.find({ phone_number: { $exists: false } });
