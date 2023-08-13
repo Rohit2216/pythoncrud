@@ -104,6 +104,17 @@ db.Rides.aggregate([
 - **Prerequisite**: Understand date and time functions in SQL / MongoDB
 - **Problem**: Assuming there's a **`ride_date`** field of date type in the **`Rides`** table / collection, write a query to find all rides that happened in the last 7 days.
 
+SELECT *
+FROM Rides
+WHERE ride_date >= CURDATE() - INTERVAL 7 DAY;
+
+
+const lastSevenDays = new Date();
+lastSevenDays.setDate(lastSevenDays.getDate() - 7);
+
+db.Rides.find({ ride_date: { $gte: lastSevenDays } });
+
+
 **Problem 42:**
 
 - **Prerequisite**: Understand the concept of NULL values and how to handle them in SQL / MongoDB
